@@ -105,7 +105,7 @@ impl Component for TranslationCreate {
                 <div><label>{"Key:"}</label><input type="text" value={&self.request.key} oninput=oninput_key/></div>
                 <div><label>{"Language:"}</label><input type="text" value={&self.request.language} oninput=oninput_language/></div>
                 <div><label>{"Target:"}</label><input type="text" value={&self.request.target} oninput=oninput_target/></div>
-                <div><button type="submit">{"Update"}</button></div>
+                <div><button type="submit" class="waves-effect waves-light btn">{"Update"}</button></div>
                 </form>
                 </article>
         }

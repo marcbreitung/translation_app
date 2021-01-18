@@ -66,20 +66,22 @@ impl Component for TranslationList {
     fn view(&self) -> Html {
         if let Some(translation_list) = &self.translation_list {
             html! {
-            <div>
+                <div>
+            <div class="collection">
             {for translation_list.iter().map(|translation| {
                 let translation_to_delete = translation.clone();
                 let onclick_delete = self.link.callback(move |ev| Msg::DeleteTranslation(translation_to_delete.id.to_string()));
                 html! {
-                    <div>
+                    <div class="collection-item">
                         <RouterAnchor<AppRoute> route=AppRoute::TranslationShow(translation.id.to_string())> {&translation.key} </RouterAnchor<AppRoute>>
                         <RouterAnchor<AppRoute> route=AppRoute::TranslationEdit(translation.id.to_string())> {"edit"} </RouterAnchor<AppRoute>>
                         <a href="#" onclick=onclick_delete>{"delete"}</a>
                     </div>
                 }
                 })}
+                </div>
             <div>
-                <RouterAnchor<AppRoute> route=AppRoute::TranslationCreate> {"add new translations"} </RouterAnchor<AppRoute>>
+                <RouterAnchor<AppRoute> route=AppRoute::TranslationCreate classes="waves-effect waves-light btn"> {"add new translations"} </RouterAnchor<AppRoute>>
             </div>
             </div>
             }

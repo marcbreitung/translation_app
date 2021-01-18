@@ -30,6 +30,11 @@ impl Component for Footer {
                         <li><RouterAnchor<AppRoute> route=AppRoute::About classes="app-link">{ "About" }</RouterAnchor<AppRoute>></li>
                     </ul>
                 </nav>
+                <div class="footer-copyright">
+            <div class="container">
+             {"© 2020 Copyright Text"}
+            </div>
+          </div>
             </footer>
 
         }
