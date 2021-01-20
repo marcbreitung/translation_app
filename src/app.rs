@@ -4,9 +4,17 @@ use yew_router::{prelude::*, route::Route};
 
 use crate::components::{footer::Footer, nav::Nav};
 use crate::routes::{
-    about::About, home::Home, translation::translation_create::TranslationCreate,
-    translation::translation_edit::TranslationEdit, translation::translation_list::TranslationList,
-    translation::translation_show::TranslationShow, AppRoute,
+    about::About, 
+    home::Home, 
+    translation::translation_create::TranslationCreate,
+    translation::translation_edit::TranslationEdit, 
+    translation::translation_list::TranslationList,
+    translation::translation_show::TranslationShow, 
+    languages::language_create::LanguageCreate,
+    languages::language_edit::LanguageEdit, 
+    languages::language_list::LanguageList,
+    languages::language_show::LanguageShow, 
+    AppRoute,
 };
 
 /// Root component
@@ -37,6 +45,10 @@ impl Component for App {
                         match switch {
                             AppRoute::Home => html!{ <Home /> },
                             AppRoute::About => html!{ <About /> },
+                            AppRoute::LanguageEdit(id) => html!{ <LanguageEdit id=Some(id.clone()) /> },
+                            AppRoute::LanguageShow(id) => html!{ <LanguageShow id=Some(id.clone()) /> },
+                            AppRoute::LanguageList => html!{ <LanguageList /> },
+                            AppRoute::LanguageCreate => html!{ <LanguageCreate /> },
                             AppRoute::TranslationEdit(id) => html!{ <TranslationEdit id=Some(id.clone()) /> },
                             AppRoute::TranslationShow(id) => html!{ <TranslationShow id=Some(id.clone()) /> },
                             AppRoute::TranslationList => html!{ <TranslationList /> },

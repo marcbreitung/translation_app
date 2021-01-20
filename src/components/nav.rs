@@ -27,6 +27,7 @@ impl Component for Nav {
                 <div class="nav-wrapper">
                     <RouterAnchor<AppRoute> route=AppRoute::Home classes="brand-logo" >{ "Home" }</RouterAnchor<AppRoute>>
                 <ul class="right hide-on-med-and-down">
+                    <li><RouterAnchor<AppRoute> route=AppRoute::LanguageList classes="app-link" >{ "Languges" }</RouterAnchor<AppRoute>></li>
                     <li><RouterAnchor<AppRoute> route=AppRoute::TranslationList classes="app-link" >{ "Translations" }</RouterAnchor<AppRoute>></li>
                     <li><RouterAnchor<AppRoute> route=AppRoute::About classes="app-link">{ "About" }</RouterAnchor<AppRoute>></li>
                 </ul>

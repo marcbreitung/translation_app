@@ -1,8 +1,10 @@
+mod languages;
 mod translations;
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+pub use languages::{LanguageCrateUpdateInfo, LanguageDelete, LanguageInfo};
 pub use translations::{TranslationCrateUpdateInfo, TranslationDelete, TranslationInfo};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]

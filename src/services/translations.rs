@@ -52,12 +52,12 @@ impl Translations {
     pub fn update(
         &mut self,
         id: String,
-        translations: TranslationInfo,
+        translation: TranslationInfo,
         callback: Callback<Result<TranslationInfo, Error>>,
     ) -> FetchTask {
         self.requests.put::<TranslationInfo, TranslationInfo>(
             format!("/translations/{}", id),
-            translations,
+            translation,
             callback,
         )
     }
