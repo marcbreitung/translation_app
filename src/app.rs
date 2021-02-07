@@ -2,7 +2,7 @@ use yew::prelude::*;
 use yew_router::switch::Permissive;
 use yew_router::{prelude::*, route::Route};
 
-use crate::components::{footer::Footer, nav::Nav};
+use crate::components::{header::Header, footer::Footer, nav::Nav};
 use crate::routes::{
     about::About, 
     home::Home, 
@@ -39,6 +39,8 @@ impl Component for App {
     fn view(&self) -> Html {
         html! {
             <>
+                <Header />
+                <main class="flex-1 flex">
                 <Nav />
                 <Router<AppRoute, ()>
                     render = Router::render(|switch: AppRoute | {
@@ -61,7 +63,7 @@ impl Component for App {
                         AppRoute::PageNotFound(Permissive(Some(route.route)))
                     })
                 />
-                <Footer />
+                </main>
             </>
         }
     }

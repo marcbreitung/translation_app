@@ -22,17 +22,18 @@ impl Component for Nav {
     }
 
     fn view(&self) -> Html {
+        let link_class = "px-3 py-1 relative block hover:text-gray-900 text-gray-500 text-sm";
         html! {
+            <div class="w-60 p-4 pt-8 shadow-sm">
             <nav>
-                <div class="nav-wrapper">
-                    <RouterAnchor<AppRoute> route=AppRoute::Home classes="brand-logo" >{ "Home" }</RouterAnchor<AppRoute>>
-                <ul class="right hide-on-med-and-down">
-                    <li><RouterAnchor<AppRoute> route=AppRoute::LanguageList classes="app-link" >{ "Languges" }</RouterAnchor<AppRoute>></li>
-                    <li><RouterAnchor<AppRoute> route=AppRoute::TranslationList classes="app-link" >{ "Translations" }</RouterAnchor<AppRoute>></li>
-                    <li><RouterAnchor<AppRoute> route=AppRoute::About classes="app-link">{ "About" }</RouterAnchor<AppRoute>></li>
+                <p class="px-3 mb-3 uppercase tracking-wide font-semibold text-sm text-gray-700">{"Edit"}</p> 
+                <ul> 
+                    <li><RouterAnchor<AppRoute> route=AppRoute::LanguageList classes=link_class >{ "Languges" }</RouterAnchor<AppRoute>></li>
+                    <li><RouterAnchor<AppRoute> route=AppRoute::TranslationList classes=link_class >{ "Translations" }</RouterAnchor<AppRoute>></li>
+                    <li><RouterAnchor<AppRoute> route=AppRoute::About classes=link_class>{ "About" }</RouterAnchor<AppRoute>></li>
                 </ul>
-                </div>
             </nav>
+            </div>
         }
     }
 }
