@@ -1,6 +1,4 @@
-# My Awesome Yew App
-
-This is the official base template for [Create Yew App](https://github.com/jetli/create-yew-app).
+# Yew Translation App  
 
 ## How to install
 

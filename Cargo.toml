@@ -1,12 +1,12 @@
 [package]
-authors = ["You <you@example.com>"]
+authors = ["Marc Breitung <info@marcbreitung.de>"]
 categories = ["wasm"]
-description = "My awesome Yew app."
+description = "Translation App"
 edition = "2018"
 license = "Apache-2.0/MIT"
-name = "yew-app"
+name = "translation_app"
 readme = "./README.md"
-repository = "https://github.com/jetli/create-yew-app.git"
+repository = "https://github.com/marcbreitung/translation_app.git"
 version = "0.1.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

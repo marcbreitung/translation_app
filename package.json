@@ -1,6 +1,6 @@
 {
-  "author": "Jet Li <jing.i.qin@icloud.com>",
-  "name": "yew-app",
+  "author": "Marc Breitung <info@marcbreitung.de>",
+  "name": "translation_app",
   "version": "0.1.0",
   "scripts": {
     "build": "cross-env WASM_PACK_PROFILE=release parcel build static/index.html --public-url ./",
