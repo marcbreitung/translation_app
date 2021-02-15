@@ -2,6 +2,7 @@ use yew::services::fetch::FetchTask;
 use yew::{
     html, Callback, Component, ComponentLink, FocusEvent, Html, InputData, Properties, ShouldRender,
 };
+use yew_base_components::components::form::{input::Input, button::Button};
 
 use crate::error::Error;
 use crate::services::Languages;
@@ -17,6 +18,7 @@ pub enum Msg {
     Request,
     RequestUpdate,
     Response(Result<LanguageInfo, Error>),
+    UpdateId(String),
     UpdateName(String),
     UpdateLang(String),
     UpdateTerritory(String),
@@ -69,6 +71,9 @@ impl Component for LanguageEdit {
                     ));
                 }
             }
+            Msg::UpdateId(id) => {
+                self.request.id = id;
+            }
             Msg::UpdateName(name) => {
                 self.request.name = name;
             }
@@ -92,26 +97,28 @@ impl Component for LanguageEdit {
             event.prevent_default();
             Msg::RequestUpdate
         });
+        let oninput_id = self
+            .link
+            .callback(|value: String| Msg::UpdateId(value));
         let oninput_name = self
             .link
-            .callback(|ev: InputData| Msg::UpdateName(ev.value));
+            .callback(|value: String| Msg::UpdateName(value));
         let oninput_lang = self
             .link
-            .callback(|ev: InputData| Msg::UpdateLang(ev.value));
+            .callback(|value: String| Msg::UpdateLang(value));
         let oninput_territory = self
             .link
-            .callback(|ev: InputData| Msg::UpdateTerritory(ev.value));
+            .callback(|value: String| Msg::UpdateTerritory(value));
         html! {
-            <article>
+            <div class="p-5 m-5 bg-white shadow-sm rounded">
                 <form onsubmit=onsubmit>
-                <div><label>{"Id:"}</label><input type="text" value={&self.request.id} readonly=true/></div>
-                <div><label>{"Name:"}</label><input type="text" value={&self.request.name} oninput=oninput_name/></div>
-                <div><label>{"Lang:"}</label><input type="text" value={&self.request.lang} oninput=oninput_lang/></div>
-                <div><label>{"Territory:"}</label><input type="text" value={&self.request.territory} oninput=oninput_territory/></div>
-
-                <div><button type="submit" class="waves-effect waves-light btn">{"Update"}</button></div>
+                <Input label="Id".to_owned() value=&self.request.id.to_owned() onupdate=oninput_id/> 
+                <Input label="Name".to_owned() value=&self.request.name.to_owned() onupdate=oninput_name/> 
+                <Input label="Language".to_owned() value=&self.request.lang.to_owned() onupdate=oninput_lang/> 
+                <Input label="Territory".to_owned() value=&self.request.territory.to_owned() onupdate=oninput_territory/> 
+                <Button label="Update".to_owned()/>
                 </form>
-                </article>
+                </div>
         }
     }
 

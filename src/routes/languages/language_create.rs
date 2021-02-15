@@ -4,6 +4,7 @@ use yew::{
     Properties, ShouldRender,
 };
 use yew_router::{agent::RouteRequest::ChangeRoute, prelude::*};
+use yew_base_components::components::form::{input::Input, button::Button};
 
 use crate::error::Error;
 use crate::routes::AppRoute;
@@ -93,22 +94,22 @@ impl Component for LanguageCreate {
         });
         let oninput_name = self
             .link
-            .callback(|ev: InputData| Msg::UpdateName(ev.value));
+            .callback(|value: String| Msg::UpdateName(value));
         let oninput_lang = self
             .link
-            .callback(|ev: InputData| Msg::UpdateLang(ev.value));
+            .callback(|value: String| Msg::UpdateLang(value));
         let oninput_territory = self
             .link
-            .callback(|ev: InputData| Msg::UpdateTerritory(ev.value));
+            .callback(|value: String| Msg::UpdateTerritory(value));
         html! {
-            <article>
+            <div class="p-5 m-5 bg-white shadow-sm rounded">
                 <form onsubmit=onsubmit>
-                <div><label>{"Name:"}</label><input type="text" value={&self.request.name} oninput=oninput_name/></div>
-                <div><label>{"Lang:"}</label><input type="text" value={&self.request.lang} oninput=oninput_lang/></div>
-                <div><label>{"Territory:"}</label><input type="text" value={&self.request.territory} oninput=oninput_territory/></div>
-                <div><button type="submit" class="waves-effect waves-light btn">{"Update"}</button></div>
+                <Input label="Name".to_owned() value=&self.request.name.to_owned() onupdate=oninput_name/>
+                <Input label="Language".to_owned() value=&self.request.lang.to_owned() onupdate=oninput_lang/>
+                <Input label="Territory".to_owned() value=&self.request.territory.to_owned() onupdate=oninput_territory/>
+                <Button label="Add".to_owned()/>
                 </form>
-                </article>
+            </div>
         }
     }
 }
