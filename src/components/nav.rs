@@ -27,7 +27,7 @@ impl Component for Nav {
             <nav>
                 <p class="px-3 mb-3 uppercase tracking-wide font-semibold text-sm text-gray-700">{"Edit"}</p>
                 <ul>
-                    <li><RouterAnchor<AppRoute> route=AppRoute::LanguageList classes=link_class >{ "Languges" }</RouterAnchor<AppRoute>></li>
+                    <li><RouterAnchor<AppRoute> route=AppRoute::LanguageList classes=link_class >{ "Languages" }</RouterAnchor<AppRoute>></li>
                     <li><RouterAnchor<AppRoute> route=AppRoute::TranslationList classes=link_class >{ "Translations" }</RouterAnchor<AppRoute>></li>
                     <li><RouterAnchor<AppRoute> route=AppRoute::About classes=link_class>{ "About" }</RouterAnchor<AppRoute>></li>
                 </ul>
