@@ -66,22 +66,45 @@ impl Component for LanguageList {
     fn view(&self) -> Html {
         if let Some(language_list) = &self.language_list {
             html! {
-                <div>
-            <div class="collection">
+                <div class="p-5 m-5 bg-white shadow-sm rounded">
+                    <div class="p-2.5 pb-5 border-b mb-7 font-semibold text-gray-700">
+                        {"Languages"}
+                    </div>
+            <table class="min-w-full divide-y divide-gray-700">
+                <thead>
+                    <tr class="bg-gray-50">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">{"Name"}</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">{"Language"}</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">{"Territory"}</th>
+                        <th scope="col" class="relative px-6 py-a3"><span class="sr-only">{"Edit"}</span></th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
             {for language_list.iter().map(|language| {
                 let language_to_delete = language.clone();
                 let onclick_delete = self.link.callback(move |ev| Msg::DeleteLanguage(language_to_delete.id.to_string()));
                 html! {
-                    <div class="collection-item">
-                        <RouterAnchor<AppRoute> route=AppRoute::LanguageShow(language.id.to_string())> {&language.name} </RouterAnchor<AppRoute>>
-                        <RouterAnchor<AppRoute> route=AppRoute::LanguageEdit(language.id.to_string())> {"edit"} </RouterAnchor<AppRoute>>
-                        <a href="#" onclick=onclick_delete>{"delete"}</a>
-                    </div>
+                    <tr>
+                        <td class="px-6 py-2 whitespace-nowrap text-sm">
+                            <RouterAnchor<AppRoute> route=AppRoute::LanguageShow(language.id.to_string())> {&language.name} </RouterAnchor<AppRoute>>
+                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap text-sm">
+                            <RouterAnchor<AppRoute> route=AppRoute::LanguageShow(language.id.to_string())> {&language.lang} </RouterAnchor<AppRoute>>
+                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap text-sm">
+                            <RouterAnchor<AppRoute> route=AppRoute::LanguageShow(language.id.to_string())> {&language.territory} </RouterAnchor<AppRoute>>
+                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap text-right text-sm">
+                            <RouterAnchor<AppRoute> route=AppRoute::LanguageEdit(language.id.to_string()) classes="text-indigo-600 inline-block p-2 hover:text-indigo-900"> {"edit"} </RouterAnchor<AppRoute>>
+                            <a href="#" class="text-indigo-600 inline-block p-2 hover:text-indigo-900" onclick=onclick_delete>{"delete"}</a>
+                        </td>
+                    </tr>
                 }
                 })}
-                </div>
-            <div>
-                <RouterAnchor<AppRoute> route=AppRoute::LanguageCreate classes="waves-effect waves-light btn"> {"add new languages"} </RouterAnchor<AppRoute>>
+                    </tbody>
+                </table>
+            <div class="p-5 text-right">
+                <RouterAnchor<AppRoute> route=AppRoute::LanguageCreate classes="border shadow-sm text-white text-sm rounded p-2 bg-indigo-700"> {"add new languages"} </RouterAnchor<AppRoute>>
             </div>
             </div>
             }

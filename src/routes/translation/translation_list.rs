@@ -73,9 +73,9 @@ impl Component for TranslationList {
 
             <table class="min-w-full divide-y divide-gray-700">
                 <thead>
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-499 uppercase tracking-wider">{"Key"}</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-499 uppercase tracking-wider">{"Language"}</th>
+                    <tr class="bg-gray-50">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">{"Key"}</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">{"Language"}</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{"Target"}</th>
                         <th scope="col" class="relative px-6 py-3"><span class="sr-only">{"Edit"}</span></th>
                     </tr>
@@ -86,27 +86,25 @@ impl Component for TranslationList {
                 let onclick_delete = self.link.callback(move |ev| Msg::DeleteTranslation(translation_to_delete.id.to_string()));
                 html! {
                     <tr> 
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <td class="px-6 py-2 whitespace-nowrap text-sm">
                             <RouterAnchor<AppRoute> route=AppRoute::TranslationShow(translation.id.to_string())> {&translation.key} </RouterAnchor<AppRoute>>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <td class="px-6 py-2 whitespace-nowrap text-sm">
                             <RouterAnchor<AppRoute> route=AppRoute::TranslationEdit(translation.id.to_string())> {&translation.language} </RouterAnchor<AppRoute>>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <td class="px-6 py-2 whitespace-nowrap text-sm">
                             <RouterAnchor<AppRoute> route=AppRoute::TranslationEdit(translation.id.to_string())> {&translation.target} </RouterAnchor<AppRoute>>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            <RouterAnchor<AppRoute> route=AppRoute::TranslationEdit(translation.id.to_string())> {"edit"} </RouterAnchor<AppRoute>>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            <a href="#" onclick=onclick_delete>{"delete"}</a>
+                        <td class="px-6 py-2 whitespace-nowrap text-right text-sm">
+                            <RouterAnchor<AppRoute> route=AppRoute::TranslationEdit(translation.id.to_string()) classes="text-indigo-600 inline-block p-2 hover:text-indigo-900"> {"edit"} </RouterAnchor<AppRoute>>
+                            <a href="#" class="text-indigo-600 inline-block p-2 hover:text-indigo-900" onclick=onclick_delete>{"delete"}</a>
                         </td>
                     </tr>
                 }
                 })}
                 </tbody>
                 </table>
-            <div>
+            <div class="p-5 text-right">
                 <RouterAnchor<AppRoute> route=AppRoute::TranslationCreate classes="border shadow-sm text-white text-sm rounded p-2 px-4 bg-indigo-700"> {"add new translations"} </RouterAnchor<AppRoute>>
             </div>
             </div>
