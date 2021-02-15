@@ -92,7 +92,9 @@ impl Component for LanguageEdit {
             event.prevent_default();
             Msg::RequestUpdate
         });
-        let oninput_name = self.link.callback(|ev: InputData| Msg::UpdateName(ev.value));
+        let oninput_name = self
+            .link
+            .callback(|ev: InputData| Msg::UpdateName(ev.value));
         let oninput_lang = self
             .link
             .callback(|ev: InputData| Msg::UpdateLang(ev.value));

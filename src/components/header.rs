@@ -1,6 +1,6 @@
+use crate::routes::AppRoute;
 use yew::prelude::*;
 use yew_router::prelude::*;
-use crate::routes::AppRoute;
 
 pub struct Header;
 
@@ -31,7 +31,7 @@ impl Component for Header {
                   <div class="flex-grow"></div>
                   <div class="flex-none">{"Account"}</div>
               </div>
-          </header>  
+          </header>
         }
     }
 }

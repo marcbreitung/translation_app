@@ -3,8 +3,8 @@ use yew_router::switch::Permissive;
 
 pub mod about;
 pub mod home;
-pub mod translation;
 pub mod languages;
+pub mod translation;
 
 /// App routes
 #[derive(Switch, Debug, Clone)]

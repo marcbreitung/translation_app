@@ -1,7 +1,8 @@
 use yew::services::fetch::FetchTask;
 use yew::{
-    html, Callback, Component, ComponentLink, FocusEvent, Html, InputData, Properties, ShouldRender,
+    html, Callback, Component, ComponentLink, FocusEvent, Html, Properties, ShouldRender,
 };
+use yew_base_components::components::form::{input::Input, button::Button};
 
 use crate::error::Error;
 use crate::services::Translations;
@@ -17,6 +18,7 @@ pub enum Msg {
     Request,
     RequestUpdate,
     Response(Result<TranslationInfo, Error>),
+    UpdateId(String),
     UpdateKey(String),
     UpdateLanguage(String),
     UpdateTarget(String),
@@ -69,6 +71,9 @@ impl Component for TranslationEdit {
                     ));
                 }
             }
+            Msg::UpdateId(key) => {
+                self.request.key = key;
+            }
             Msg::UpdateKey(key) => {
                 self.request.key = key;
             }
@@ -92,24 +97,24 @@ impl Component for TranslationEdit {
             event.prevent_default();
             Msg::RequestUpdate
         });
-        let oninput_key = self.link.callback(|ev: InputData| Msg::UpdateKey(ev.value));
+        let oninput_id = self.link.callback(|value: String| Msg::UpdateId(value));
+        let oninput_key = self.link.callback(|value: String| Msg::UpdateKey(value));
         let oninput_language = self
             .link
-            .callback(|ev: InputData| Msg::UpdateLanguage(ev.value));
+            .callback(|value: String| Msg::UpdateLanguage(value));
         let oninput_target = self
             .link
-            .callback(|ev: InputData| Msg::UpdateTarget(ev.value));
+            .callback(|value: String| Msg::UpdateTarget(value));
         html! {
-            <article>
+            <div class="p-5 m-5 bg-white shadow-sm rounded">
                 <form onsubmit=onsubmit>
-                <div><label>{"Id:"}</label><input type="text" value={&self.request.id} readonly=true/></div>
-                <div><label>{"Key:"}</label><input type="text" value={&self.request.key} oninput=oninput_key/></div>
-                <div><label>{"Language:"}</label><input type="text" value={&self.request.language} oninput=oninput_language/></div>
-                <div><label>{"Target:"}</label><input type="text" value={&self.request.target} oninput=oninput_target/></div>
-
-                <div><button type="submit" class="waves-effect waves-light btn">{"Update"}</button></div>
+                <Input label="Id:".to_owned() value=&self.request.id.to_owned() onupdate=oninput_id/>
+                <Input label="Key:".to_owned() value=&self.request.key.to_owned() onupdate=oninput_key/>
+                <Input label="Language:".to_owned() value=&self.request.language.to_owned() onupdate=oninput_language/>
+                <Input label="Target:".to_owned() value=&self.request.target.to_owned() onupdate=oninput_target/>
+                <Button label="Update".to_owned()/>
                 </form>
-                </article>
+            </div>
         }
     }
 

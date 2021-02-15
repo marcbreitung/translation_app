@@ -4,6 +4,7 @@ use yew::{
     Properties, ShouldRender,
 };
 use yew_router::{agent::RouteRequest::ChangeRoute, prelude::*};
+use yew_base_components::components::form::{input::Input, button::Button};
 
 use crate::error::Error;
 use crate::routes::AppRoute;
@@ -68,8 +69,7 @@ impl Component for TranslationCreate {
                         .create(self.request.clone(), self.response.clone()),
                 );
             }
-            Msg::UpdateKey(key) => {
-                self.request.key = key;
+            Msg::UpdateKey(key) => { self.request.key = key;
             }
             Msg::UpdateLanguage(language) => {
                 self.request.language = language;
@@ -92,22 +92,22 @@ impl Component for TranslationCreate {
             event.prevent_default();
             Msg::Request
         });
-        let oninput_key = self.link.callback(|ev: InputData| Msg::UpdateKey(ev.value));
+        let oninput_key = self.link.callback(|value: String| Msg::UpdateKey(value));
         let oninput_language = self
             .link
-            .callback(|ev: InputData| Msg::UpdateLanguage(ev.value));
+            .callback(|value: String| Msg::UpdateLanguage(value));
         let oninput_target = self
             .link
-            .callback(|ev: InputData| Msg::UpdateTarget(ev.value));
+            .callback(|value: String| Msg::UpdateTarget(value));
         html! {
-            <article>
+            <div class="p-5 m-5 bg-white shadow-sm rounded">
                 <form onsubmit=onsubmit>
-                <div><label>{"Key:"}</label><input type="text" value={&self.request.key} oninput=oninput_key/></div>
-                <div><label>{"Language:"}</label><input type="text" value={&self.request.language} oninput=oninput_language/></div>
-                <div><label>{"Target:"}</label><input type="text" value={&self.request.target} oninput=oninput_target/></div>
-                <div><button type="submit" class="waves-effect waves-light btn">{"Update"}</button></div>
+                 <Input label="Key:".to_owned() value=&self.request.key.to_owned() onupdate=oninput_key/>
+                 <Input label="Language:".to_owned() value=&self.request.language.to_owned() onupdate=oninput_language/>
+                <Input label="Target:".to_owned() value=&self.request.target.to_owned() onupdate=oninput_target/>
+                <Button label="Update".to_owned()/>
                 </form>
-                </article>
+            </div>
         }
     }
 }

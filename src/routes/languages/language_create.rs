@@ -55,9 +55,8 @@ impl Component for LanguageCreate {
         match msg {
             Msg::Response(Ok(language)) => {
                 self.task = None;
-                self.router_agent.send(ChangeRoute(
-                    AppRoute::LanguageEdit(language.id).into(),
-                ));
+                self.router_agent
+                    .send(ChangeRoute(AppRoute::LanguageEdit(language.id).into()));
             }
             Msg::Response(Err(_)) => {
                 self.task = None;
@@ -92,7 +91,9 @@ impl Component for LanguageCreate {
             event.prevent_default();
             Msg::Request
         });
-        let oninput_name = self.link.callback(|ev: InputData| Msg::UpdateName(ev.value));
+        let oninput_name = self
+            .link
+            .callback(|ev: InputData| Msg::UpdateName(ev.value));
         let oninput_lang = self
             .link
             .callback(|ev: InputData| Msg::UpdateLang(ev.value));

@@ -2,19 +2,13 @@ use yew::prelude::*;
 use yew_router::switch::Permissive;
 use yew_router::{prelude::*, route::Route};
 
-use crate::components::{header::Header, footer::Footer, nav::Nav};
+use crate::components::{header::Header, nav::Nav};
 use crate::routes::{
-    about::About, 
-    home::Home, 
-    translation::translation_create::TranslationCreate,
-    translation::translation_edit::TranslationEdit, 
-    translation::translation_list::TranslationList,
-    translation::translation_show::TranslationShow, 
-    languages::language_create::LanguageCreate,
-    languages::language_edit::LanguageEdit, 
-    languages::language_list::LanguageList,
-    languages::language_show::LanguageShow, 
-    AppRoute,
+    about::About, home::Home, languages::language_create::LanguageCreate,
+    languages::language_edit::LanguageEdit, languages::language_list::LanguageList,
+    languages::language_show::LanguageShow, translation::translation_create::TranslationCreate,
+    translation::translation_edit::TranslationEdit, translation::translation_list::TranslationList,
+    translation::translation_show::TranslationShow, AppRoute,
 };
 
 /// Root component
@@ -41,7 +35,10 @@ impl Component for App {
             <>
                 <Header />
                 <main class="flex-1 flex">
+                <div class="w-60 p-4 pt-8 shadow-sm">
                 <Nav />
+                </div>
+                <div class="flex-1 bg-gray-50">
                 <Router<AppRoute, ()>
                     render = Router::render(|switch: AppRoute | {
                         match switch {
@@ -63,6 +60,7 @@ impl Component for App {
                         AppRoute::PageNotFound(Permissive(Some(route.route)))
                     })
                 />
+                    </div>
                 </main>
             </>
         }

@@ -58,12 +58,14 @@ impl Component for TranslationShow {
     fn view(&self) -> Html {
         if let Some(translation) = &self.translation {
             html! {
+                <div class="p-5 m-5 bg-white shadow-sm rounded">
                 <article>
                     <h1>{&translation.id}</h1>
                     <h2>{&translation.key}</h2>
                     <p>{&translation.language}</p>
                     <p>{&translation.target}</p>
                 </article>
+                </div>
             }
         } else {
             html! {}

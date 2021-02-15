@@ -1,4 +1,3 @@
-
 use yew::callback::Callback;
 use yew::services::fetch::FetchTask;
 
@@ -42,12 +41,11 @@ impl Languages {
         language: LanguageCrateUpdateInfo,
         callback: Callback<Result<LanguageInfo, Error>>,
     ) -> FetchTask {
-        self.requests
-            .post::<LanguageCrateUpdateInfo, LanguageInfo>(
-                "/languages".to_owned(),
-                language,
-                callback,
-            )
+        self.requests.post::<LanguageCrateUpdateInfo, LanguageInfo>(
+            "/languages".to_owned(),
+            language,
+            callback,
+        )
     }
 
     pub fn update(

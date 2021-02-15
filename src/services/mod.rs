@@ -1,7 +1,7 @@
+mod languages;
 mod requests;
 mod translations;
-mod languages;
 
+pub use languages::Languages;
 pub use requests::Requests;
 pub use translations::Translations;
-pub use languages::Languages;

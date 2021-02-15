@@ -66,7 +66,7 @@ impl Component for TranslationList {
     fn view(&self) -> Html {
         if let Some(translation_list) = &self.translation_list {
             html! {
-                <div>
+                <div class="p-5 m-5 bg-white shadow-sm rounded">
             <div class="collection">
             {for translation_list.iter().map(|translation| {
                 let translation_to_delete = translation.clone();
