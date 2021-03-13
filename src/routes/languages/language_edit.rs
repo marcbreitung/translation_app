@@ -1,6 +1,6 @@
 use yew::services::fetch::FetchTask;
 use yew::{
-    html, Callback, Component, ComponentLink, FocusEvent, Html, InputData, Properties, ShouldRender,
+    html, Callback, Component, ComponentLink, FocusEvent, Html, Properties, ShouldRender,
 };
 use yew_base_components::components::form::{input::Input, button::Button};
 
