@@ -1,10 +1,10 @@
 use yew::services::fetch::FetchTask;
 use yew::{
-    agent::Bridged, html, Bridge, Callback, Component, ComponentLink, FocusEvent, Html,
-    Properties, ShouldRender,
+    agent::Bridged, html, Bridge, Callback, Component, ComponentLink, FocusEvent, Html, Properties,
+    ShouldRender,
 };
+use yew_base_components::components::form::{button::Button, input::Input};
 use yew_router::{agent::RouteRequest::ChangeRoute, prelude::*};
-use yew_base_components::components::form::{input::Input, button::Button};
 
 use crate::error::Error;
 use crate::routes::AppRoute;
@@ -69,7 +69,8 @@ impl Component for TranslationCreate {
                         .create(self.request.clone(), self.response.clone()),
                 );
             }
-            Msg::UpdateKey(key) => { self.request.key = key;
+            Msg::UpdateKey(key) => {
+                self.request.key = key;
             }
             Msg::UpdateLanguage(language) => {
                 self.request.language = language;
@@ -96,9 +97,7 @@ impl Component for TranslationCreate {
         let oninput_language = self
             .link
             .callback(|value: String| Msg::UpdateLanguage(value));
-        let oninput_target = self
-            .link
-            .callback(|value: String| Msg::UpdateTarget(value));
+        let oninput_target = self.link.callback(|value: String| Msg::UpdateTarget(value));
         html! {
             <div class="p-5 m-5 bg-white shadow-sm rounded">
                 <form onsubmit=onsubmit>

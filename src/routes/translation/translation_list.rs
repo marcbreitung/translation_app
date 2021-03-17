@@ -2,6 +2,9 @@ use yew::services::fetch::FetchTask;
 use yew::{html, Callback, Component, ComponentLink, Html, ShouldRender};
 use yew_router::prelude::*;
 
+use yew_base_components::components::color_scheme::ColorScheme;
+use yew_base_components::components::message::message::Message;
+
 use crate::error::Error;
 use crate::routes::AppRoute;
 use crate::services::Translations;
@@ -20,6 +23,7 @@ pub struct TranslationList {
     response_delete: Callback<Result<TranslationDelete, Error>>,
     task: Option<FetchTask>,
     link: ComponentLink<Self>,
+    error_message: Option<String>,
 }
 
 impl Component for TranslationList {
@@ -34,6 +38,7 @@ impl Component for TranslationList {
             response_delete: link.callback(Msg::ResponseDelete),
             task: None,
             link,
+            error_message: None,
         }
     }
 
@@ -43,8 +48,10 @@ impl Component for TranslationList {
                 self.translation_list = Some(translation_list);
                 self.task = None;
             }
-            Msg::Response(Err(_)) => {
+            Msg::Response(Err(error)) => {
                 self.task = None;
+                let message: String = format!("An error occurred: {:?}", error);
+                self.error_message = Some(message);
             }
             Msg::ResponseDelete(Ok(_translation_deleted)) => {
                 self.task = Some(self.translations.all(self.response.clone()))
@@ -85,7 +92,7 @@ impl Component for TranslationList {
                 let translation_to_delete = translation.clone();
                 let onclick_delete = self.link.callback(move |ev| Msg::DeleteTranslation(translation_to_delete.id.to_string()));
                 html! {
-                    <tr> 
+                    <tr>
                         <td class="px-6 py-2 whitespace-nowrap text-sm">
                             <RouterAnchor<AppRoute> route=AppRoute::TranslationShow(translation.id.to_string())> {&translation.key} </RouterAnchor<AppRoute>>
                         </td>
@@ -110,7 +117,13 @@ impl Component for TranslationList {
             </div>
             }
         } else {
-            html! {}
+            if let Some(error_message) = &self.error_message {
+                html! {
+                    <Message text={error_message} color_scheme=ColorScheme::Error/>
+                }
+            } else {
+                html! {}
+            }
         }
     }
 

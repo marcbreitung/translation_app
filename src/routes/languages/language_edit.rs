@@ -1,8 +1,6 @@
 use yew::services::fetch::FetchTask;
-use yew::{
-    html, Callback, Component, ComponentLink, FocusEvent, Html, Properties, ShouldRender,
-};
-use yew_base_components::components::form::{input::Input, button::Button};
+use yew::{html, Callback, Component, ComponentLink, FocusEvent, Html, Properties, ShouldRender};
+use yew_base_components::components::form::{button::Button, input::Input};
 
 use crate::error::Error;
 use crate::services::Languages;
@@ -97,25 +95,19 @@ impl Component for LanguageEdit {
             event.prevent_default();
             Msg::RequestUpdate
         });
-        let oninput_id = self
-            .link
-            .callback(|value: String| Msg::UpdateId(value));
-        let oninput_name = self
-            .link
-            .callback(|value: String| Msg::UpdateName(value));
-        let oninput_lang = self
-            .link
-            .callback(|value: String| Msg::UpdateLang(value));
+        let oninput_id = self.link.callback(|value: String| Msg::UpdateId(value));
+        let oninput_name = self.link.callback(|value: String| Msg::UpdateName(value));
+        let oninput_lang = self.link.callback(|value: String| Msg::UpdateLang(value));
         let oninput_territory = self
             .link
             .callback(|value: String| Msg::UpdateTerritory(value));
         html! {
             <div class="p-5 m-5 bg-white shadow-sm rounded">
                 <form onsubmit=onsubmit>
-                <Input label="Id".to_owned() value=&self.request.id.to_owned() onupdate=oninput_id/> 
-                <Input label="Name".to_owned() value=&self.request.name.to_owned() onupdate=oninput_name/> 
-                <Input label="Language".to_owned() value=&self.request.lang.to_owned() onupdate=oninput_lang/> 
-                <Input label="Territory".to_owned() value=&self.request.territory.to_owned() onupdate=oninput_territory/> 
+                <Input label="Id".to_owned() value=&self.request.id.to_owned() onupdate=oninput_id/>
+                <Input label="Name".to_owned() value=&self.request.name.to_owned() onupdate=oninput_name/>
+                <Input label="Language".to_owned() value=&self.request.lang.to_owned() onupdate=oninput_lang/>
+                <Input label="Territory".to_owned() value=&self.request.territory.to_owned() onupdate=oninput_territory/>
                 <Button label="Update".to_owned()/>
                 </form>
                 </div>

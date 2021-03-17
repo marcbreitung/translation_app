@@ -1,10 +1,10 @@
 use yew::services::fetch::FetchTask;
 use yew::{
-    agent::Bridged, html, Bridge, Callback, Component, ComponentLink, FocusEvent, Html, 
-    Properties, ShouldRender,
+    agent::Bridged, html, Bridge, Callback, Component, ComponentLink, FocusEvent, Html, Properties,
+    ShouldRender,
 };
+use yew_base_components::components::form::{button::Button, input::Input};
 use yew_router::{agent::RouteRequest::ChangeRoute, prelude::*};
-use yew_base_components::components::form::{input::Input, button::Button};
 
 use crate::error::Error;
 use crate::routes::AppRoute;
@@ -92,12 +92,8 @@ impl Component for LanguageCreate {
             event.prevent_default();
             Msg::Request
         });
-        let oninput_name = self
-            .link
-            .callback(|value: String| Msg::UpdateName(value));
-        let oninput_lang = self
-            .link
-            .callback(|value: String| Msg::UpdateLang(value));
+        let oninput_name = self.link.callback(|value: String| Msg::UpdateName(value));
+        let oninput_lang = self.link.callback(|value: String| Msg::UpdateLang(value));
         let oninput_territory = self
             .link
             .callback(|value: String| Msg::UpdateTerritory(value));

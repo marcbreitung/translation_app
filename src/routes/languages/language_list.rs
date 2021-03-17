@@ -2,6 +2,9 @@ use yew::services::fetch::FetchTask;
 use yew::{html, Callback, Component, ComponentLink, Html, ShouldRender};
 use yew_router::prelude::*;
 
+use yew_base_components::components::color_scheme::ColorScheme;
+use yew_base_components::components::message::message::Message;
+
 use crate::error::Error;
 use crate::routes::AppRoute;
 use crate::services::Languages;
@@ -20,6 +23,7 @@ pub struct LanguageList {
     response_delete: Callback<Result<LanguageDelete, Error>>,
     task: Option<FetchTask>,
     link: ComponentLink<Self>,
+    error_message: Option<String>,
 }
 
 impl Component for LanguageList {
@@ -34,6 +38,7 @@ impl Component for LanguageList {
             response_delete: link.callback(Msg::ResponseDelete),
             task: None,
             link,
+            error_message: None,
         }
     }
 
@@ -43,8 +48,10 @@ impl Component for LanguageList {
                 self.language_list = Some(language_list);
                 self.task = None;
             }
-            Msg::Response(Err(_)) => {
+            Msg::Response(Err(error)) => {
                 self.task = None;
+                let message: String = format!("An error occurred: {:?}", error);
+                self.error_message = Some(message);
             }
             Msg::ResponseDelete(Ok(_language_deleted)) => {
                 self.task = Some(self.languages.all(self.response.clone()))
@@ -109,7 +116,13 @@ impl Component for LanguageList {
             </div>
             }
         } else {
-            html! {}
+            if let Some(error_message) = &self.error_message {
+                html! {
+                    <Message text={error_message} color_scheme=ColorScheme::Error/>
+                }
+            } else {
+                html! {}
+            }
         }
     }
 

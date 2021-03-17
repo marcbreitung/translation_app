@@ -1,8 +1,6 @@
 use yew::services::fetch::FetchTask;
-use yew::{
-    html, Callback, Component, ComponentLink, FocusEvent, Html, Properties, ShouldRender,
-};
-use yew_base_components::components::form::{input::Input, button::Button};
+use yew::{html, Callback, Component, ComponentLink, FocusEvent, Html, Properties, ShouldRender};
+use yew_base_components::components::form::{button::Button, input::Input};
 
 use crate::error::Error;
 use crate::services::Translations;
@@ -102,9 +100,7 @@ impl Component for TranslationEdit {
         let oninput_language = self
             .link
             .callback(|value: String| Msg::UpdateLanguage(value));
-        let oninput_target = self
-            .link
-            .callback(|value: String| Msg::UpdateTarget(value));
+        let oninput_target = self.link.callback(|value: String| Msg::UpdateTarget(value));
         html! {
             <div class="p-5 m-5 bg-white shadow-sm rounded">
                 <form onsubmit=onsubmit>
